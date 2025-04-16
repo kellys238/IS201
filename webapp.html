@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Baby Name Generator</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #fdf6f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    h1 {
+      color: #ff4081;
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+    }
+
+    input, select {
+      padding: 10px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      width: 250px;
+    }
+
+    button {
+      background-color: #ff4081;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #e91e63;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      color: #e91e63;
+      font-weight: bold;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Baby Name Generator</h1>
+  <p>Type your last name and choose boy or girl:</p>
+
+  <input type="text" id="lastNameInput" placeholder="Enter last name" />
+  
+  <select id="genderSelect">
+    <option value="">-- Choose Gender --</option>
+    <option value="boy">Boy</option>
+    <option value="girl">Girl</option>
+  </select>
+
+  <div class="button-group">
+    <button onclick="generateName()">Generate Name</button>
+    <button onclick="generateName()" id="anotherBtn" style="display: none;">Try Another Name</button>
+  </div>
+
+  <div id="result">Your full name will appear here.</div>
+
+  <script>
+    const boyNames = [
+      "Leo", "Asher", "Milo", "Ezra", "Silas", "Kai", "Jasper", 
+      "Finn", "Atlas", "Elio", "Theo", "Rowan", "Eli"
+    ];
+
+    const girlNames = [
+      "Luna", "Aurora", "Isla", "Aria", "Nova", "Freya", "Ivy", 
+      "Hazel", "Cora", "Maeve", "Lila", "Sage"
+    ];
+
+    function generateName() {
+      const lastName = document.getElementById("lastNameInput").value.trim();
+      const gender = document.getElementById("genderSelect").value;
+
+      if (lastName === "") {
+        alert("Please enter a last name first.");
+        return;
+      }
+
+      if (gender !== "boy" && gender !== "girl") {
+        alert("Please select either 'Boy' or 'Girl' as the gender.");
+        return;
+      }
+
+      const nameList = gender === "boy" ? boyNames : girlNames;
+      const randomIndex = Math.floor(Math.random() * nameList.length);
+      const firstName = nameList[randomIndex];
+      const fullName = `${firstName} ${lastName}`;
+
+      document.getElementById("result").textContent = `How about: ${fullName}?`;
+      document.getElementById("anotherBtn").style.display = "inline-block";
+    }
+  </script>
+
+</body>
+</html>
